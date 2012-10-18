@@ -1,8 +1,11 @@
 require 'nokogiri'
+require 'open-uri'
 
 class TourDate
   attr_accessor :date
   attr_accessor :city
+  attr_accessor :conditions
+  attr_accessor :temperature
 
   def initialize(params)
     self.date = params[:date]
@@ -19,6 +22,13 @@ class TourDate
         )
       end
     ).slice(-5, 5)
+  end
+
+  def get_weather
+    doc = Nokogiri::HTML(Net::HTTP.get("www.wunderground.com",
+      "/cgi-bin/findweather/hdfForecast?query=#{URI::encode(city)}"))
+    self.conditions = doc.css('#curCond').text
+    self.temperature = doc.css('#tempActual').text.strip
   end
 
 end

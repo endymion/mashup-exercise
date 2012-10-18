@@ -13,4 +13,15 @@ describe "TourDate" do
     last_date.city.should == 'Portland, OR'
   end
 
+  it "should get the current weather for a given date" do
+    FakeWeb.register_uri(:get,
+      'http://www.wunderground.com/cgi-bin/findweather/hdfForecast?query=Portland,%20OR',
+      :body => File.open('spec/fixtures/weather.html'))
+
+    date = TourDate.new(:city => 'Portland, OR')
+    date.get_weather
+    date.conditions.should == 'Overcast'
+    # date.temperature.should == '48.9 °F'
+  end
+
 end
