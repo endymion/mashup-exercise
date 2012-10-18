@@ -2,17 +2,17 @@ require 'rubygems'
 require 'bundler'
 
 require 'sinatra'
-require_relative 'tourdate'
+require_relative 'event'
 
 get '/' do
-  dates = TourDate.get_dates
-  threads = dates.map do |date|
+  events = Event.get_events
+  threads = events.map do |event|
     Thread.new do
-      date.get_weather
+      event.get_weather
     end
   end
   threads.each {|thread| thread.join }
-  haml :index, :locals => {:dates => dates}
+  haml :index, :locals => {:events => events}
 end
 
 get "/css/:sheet.css" do |sheet|

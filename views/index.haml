@@ -1,12 +1,12 @@
 %h1 Vans Warped Tour Weather
 
-- dates.each do |date|
-  %h2= "#{date.city}, #{date.state}"
+- events.each do |event|
+  %h2= "#{event.city}, #{event.state}"
 
   %p
     Current conditions:
-    = date.conditions
+    = event.conditions
 
   %p
     Temperature:
-    = date.temperature
+    = event.temperature
