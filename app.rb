@@ -4,5 +4,9 @@ require 'bundler'
 require 'sinatra'
 
 get '/' do
-  "Hello, World!"
+  haml :index
+end
+
+get "/css/:sheet.css" do |sheet|
+  sass :"sass/#{sheet}"
 end
