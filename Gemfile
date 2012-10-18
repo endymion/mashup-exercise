@@ -11,4 +11,5 @@ group(:test, :development) do
   gem 'simplecov', '~> 0.6.4'
   gem 'fakeweb', '~> 1.3.0'
   gem 'debugger'
+  gem 'heroku'
 end
