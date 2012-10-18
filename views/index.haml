@@ -1,2 +1,12 @@
 %h1 Vans Warped Tour Weather
-%p Hello, World!
+
+- dates.each do |date|
+  %h2= "#{date.city}, #{date.state}"
+
+  %p
+    Current conditions:
+    = date.conditions
+
+  %p
+    Temperature:
+    = date.temperature
